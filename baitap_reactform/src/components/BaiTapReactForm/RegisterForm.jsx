@@ -1,5 +1,6 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
+import { addUserAction, updateUserAction } from "../../store/actions/userAction";
 
 class RegisterForm extends Component {
   maSVInputRef = createRef();
@@ -12,7 +13,6 @@ class RegisterForm extends Component {
     phoneNumber: "",
     email: "",
   };
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -144,10 +144,7 @@ class RegisterForm extends Component {
       );
     if (isValid) {
       if (this.props.selectedUser) {
-        this.props.dispatch({
-          type: "UPDATE_USER",
-          payload: this.state,
-        });
+        this.props.dispatch(updateUserAction(this.state));
         this.setState({
           maSV: "",
           hoTen: "",
@@ -155,10 +152,7 @@ class RegisterForm extends Component {
           email: "",
         });
       } else {
-        this.props.dispatch({
-          type: "ADD_USER",
-          payload: this.state,
-        });
+        this.props.dispatch(addUserAction(this.state));
         this.setState({
           maSV: "",
           hoTen: "",
@@ -236,7 +230,7 @@ class RegisterForm extends Component {
                 </div>
               </div>
             </div>
-            <button 
+            <button onClick={this.anThongBao}
               className="btn btn-success mr-2"
               style={{ display: this.props.selectedUser ? "none" : "block" }}
             >

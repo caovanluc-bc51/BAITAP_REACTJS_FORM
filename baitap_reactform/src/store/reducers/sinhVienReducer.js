@@ -1,4 +1,5 @@
 import danhSachSinhVien from "../../data/danhSachSinhVien.json";
+import { ADD_USER, DELETE_USER, SET_SELECTED_USER, UPDATE_USER } from "../types/userType";
 const DEFAULT_STATE = {
   sinhVienList: danhSachSinhVien,
   selectedUser: null,
@@ -10,7 +11,7 @@ if (stringify) {
 export const sinhVienReducer = (state = DEFAULT_STATE, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case "ADD_USER": {
+    case ADD_USER: {
       if (
         window.confirm(
           `Bạn có chắc muốn thêm sinh viên ${action.payload.maSV} không?`
@@ -26,11 +27,11 @@ export const sinhVienReducer = (state = DEFAULT_STATE, action) => {
       break;
     }
     // eslint-disable-next-line no-fallthrough
-    case "SET_SELECTED_USER": {
+    case SET_SELECTED_USER: {
       state.selectedUser = action.payload;
       break;
     }
-    case "UPDATE_USER": {
+    case UPDATE_USER: {
       if (
         window.confirm(
           `Bạn có chắc muốn cập nhật cho sinh viên ${action.payload.maSV} không?`
@@ -52,7 +53,7 @@ export const sinhVienReducer = (state = DEFAULT_STATE, action) => {
       break;
     }
     // eslint-disable-next-line no-fallthrough
-    case "DELETE_USER": {
+    case DELETE_USER: {
       if (
         window.confirm(
           `Bạn có chắc muốn xóa sinh viên ${action.payload.maSV} không?`

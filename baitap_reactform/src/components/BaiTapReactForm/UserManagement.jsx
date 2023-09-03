@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { deleteUserAction, setSelectedUserAction } from "../../store/actions/userAction";
 
 class UserManagement extends Component {
   state = {
@@ -24,10 +25,7 @@ class UserManagement extends Component {
           <td>
             <button 
               onClick={() => {
-                this.props.dispatch({
-                  type: "SET_SELECTED_USER",
-                  payload: element,
-                });
+                this.props.dispatch(setSelectedUserAction(element));
               }}
               className="btn btn-info mr-2"
             >
@@ -35,10 +33,7 @@ class UserManagement extends Component {
             </button>
             <button
               onClick={() => {
-                this.props.dispatch({
-                  type: "DELETE_USER",
-                  payload: element,
-                });
+                this.props.dispatch(deleteUserAction(element));
               }}
               className="btn btn-danger"
             >
