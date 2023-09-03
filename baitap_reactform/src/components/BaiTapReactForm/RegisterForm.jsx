@@ -1,6 +1,9 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
-import { addUserAction, updateUserAction } from "../../store/actions/userAction";
+import {
+  addUserAction,
+  updateUserAction,
+} from "../../store/actions/userAction";
 
 class RegisterForm extends Component {
   maSVInputRef = createRef();
@@ -80,7 +83,15 @@ class RegisterForm extends Component {
     }
     return currentState;
   }
-  //hàm sự kiện ở form khi nhấn nút lưu
+  handleCapNhat = (el) => {
+    if(el.target.value === 'capNhat'){
+      this.maSVInputRef.current.style.display = "none";
+      this.hoTenInPutRef.current.style.display = "block";
+      this.phoneNumberInputRef.current.style.display = "block";
+      this.emailInputRef.current.style.display = "block";
+    }
+  }
+  //hàm sự kiện ở form khi nhấn nút
   handSubmit = (event) => {
     //chống load lại trang khi nhấn nút
     event.preventDefault();
@@ -145,6 +156,7 @@ class RegisterForm extends Component {
     if (isValid) {
       if (this.props.selectedUser) {
         this.props.dispatch(updateUserAction(this.state));
+        this.maSVInputRef.current.innerHTML = "";
         this.setState({
           maSV: "",
           hoTen: "",
@@ -161,9 +173,9 @@ class RegisterForm extends Component {
         });
       }
     }
+    
   };
-  
-  
+
   render() {
     return (
       <div className="card p-0">
@@ -184,7 +196,7 @@ class RegisterForm extends Component {
                     type="text"
                     className="form-control"
                   />
-                  <span ref={this.maSVInputRef} className="text-danger"></span>
+                  <span style={{display: this.props.selectedUser ? 'none' : 'block'}} ref={this.maSVInputRef} className="text-danger"></span>
                 </div>
               </div>
               <div className="col-6">
@@ -197,7 +209,7 @@ class RegisterForm extends Component {
                     type="text"
                     className="form-control"
                   />
-                  <span  ref={this.hoTenInPutRef} className="text-danger"></span>
+                  <span style={{display: this.props.selectedUser ? 'none' : 'block'}} ref={this.hoTenInPutRef} className="text-danger"></span>
                 </div>
               </div>
               <div className="col-6">
@@ -210,7 +222,7 @@ class RegisterForm extends Component {
                     type="text"
                     className="form-control"
                   />
-                  <span
+                  <span style={{display: this.props.selectedUser ? 'none' : 'block'}}
                     ref={this.phoneNumberInputRef}
                     className="text-danger"
                   ></span>
@@ -226,17 +238,17 @@ class RegisterForm extends Component {
                     type="text"
                     className="form-control"
                   />
-                  <span ref={this.emailInputRef} className="text-danger"></span>
+                  <span style={{display: this.props.selectedUser ? 'none' : 'block'}} ref={this.emailInputRef} className="text-danger"></span>
                 </div>
               </div>
             </div>
-            <button onClick={this.anThongBao}
+            <button 
               className="btn btn-success mr-2"
               style={{ display: this.props.selectedUser ? "none" : "block" }}
             >
               Thêm Sinh Viên
             </button>
-            <button
+            <button value='capNhat' onClick={this.handleCapNhat}
               className="btn btn-primary mr-2"
               style={{ display: this.props.selectedUser ? "block" : "none" }}
             >
