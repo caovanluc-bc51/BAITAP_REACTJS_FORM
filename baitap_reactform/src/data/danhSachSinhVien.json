@@ -1,0 +1,14 @@
+[
+    {
+      "maSV": 1,
+      "hoTen": "Man Ng",
+      "phoneNumber": "12345678",
+      "email": "man@gmail.com"
+    },
+    {
+      "maSV": 2,
+      "hoTen": "Khai Tr",
+      "phoneNumber": "12345678",
+      "email": "khai@gmail.com"
+    }
+  ]
